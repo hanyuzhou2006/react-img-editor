@@ -5,7 +5,15 @@ module.exports = {
   addons: ["@storybook/addon-essentials"],
   framework: {
     name: "@storybook/react-webpack5",
-    options: {}
+    options: {
+      builder: {
+        useSWC: false,
+      },
+    }
+  },
+  typescript: {
+    check: false,
+    reactDocgen: 'react-docgen-typescript',
   },
   docs: {
     autodocs: true
