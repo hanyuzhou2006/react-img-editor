@@ -1,7 +1,7 @@
 import PubSub from './PubSub'
 import { EditorContextProps } from '../components/EditorContext'
-import { Stage } from 'konva/types/Stage'
-import { Layer } from 'konva/types/Layer'
+import { Stage } from 'konva/lib/Stage'
+import { Layer } from 'konva/lib/Layer'
 
 export interface DrawEventParams extends EditorContextProps {
   event?: any;

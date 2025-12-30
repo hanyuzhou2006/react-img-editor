@@ -5,8 +5,8 @@ import { EditorContextProps,  withEditorContext } from './EditorContext'
 import { DrawEventParams } from '../common/type'
 import { prefixCls } from '../common/constants'
 import { uuid } from '../common/utils'
-import { Stage } from 'konva/types/Stage'
-import { Layer } from 'konva/types/Layer'
+import { Stage } from 'konva/lib/Stage'
+import { Layer } from 'konva/lib/Layer'
 
 interface PaletteProps extends EditorContextProps {
   height: number;
@@ -285,8 +285,7 @@ class Palette extends React.Component<PaletteProps> {
   }
 
   render() {
-    const { height } = this.props
-    const { containerWidth } = this.context
+    const { height, containerWidth } = this.props
     const style = {
       width: containerWidth,
       height: height, // 高度是用户设置的高度减掉工具栏的高度

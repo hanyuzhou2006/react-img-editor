@@ -21,7 +21,7 @@ export default function<CP>(Context: React.Context<CP>, shouldRender: (context: 
     }
 
     return React.forwardRef<WrappedComponentInstance, WrappedComponentProps>((props, ref) => (
-      <InjectContext forwardRef={ref} {...props} />
+      <InjectContext forwardRef={ref} {...(props as any)} />
     ))
   }
 }
