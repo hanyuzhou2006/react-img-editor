@@ -57,7 +57,7 @@ import "@sansitech/react-img-editor/lib/index.css";
 Development
 
 ```bash
-yarn run development
+yarn run develop
 ```
 
 ## Credits
