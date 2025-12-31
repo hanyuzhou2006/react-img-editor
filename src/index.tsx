@@ -22,19 +22,32 @@ interface ReactImageEditorProps {
   language?: string;
 }
 
-export default function ReactImageEditor(props: ReactImageEditorProps) {
+export default function ReactImageEditor({
+  width = 700,
+  height = 500,
+  style = {},
+  plugins = [],
+  toolbar = {
+    items: ['pen', 'eraser', 'arrow', 'rect', 'circle', 'mosaic', 'text', '|', 'repeal', 'download', 'crop'],
+  },
+  src,
+  getStage,
+  defaultPluginName,
+  crossOrigin,
+  language: languageProp,
+}: ReactImageEditorProps) {
   const [imageObj, setImageObj] = useState<HTMLImageElement | null>(null)
   // Convert en-US to en
-  const language = (props.language || 'en').substring(0, 2)
+  const language = (languageProp || 'en').substring(0, 2)
 
   const pluginFactory = new PluginFactory()
-  const plugins = [...pluginFactory.plugins, ...props.plugins!]
+  const allPlugins = [...pluginFactory.plugins, ...plugins]
   let defaultPlugin = null
   let defaultParamValue = {}
-  for (let i = 0; i < plugins.length; i++) {
-    plugins[i].language = language
-    if (props.defaultPluginName && props.toolbar && plugins[i].name === props.defaultPluginName) {
-      defaultPlugin = plugins[i]
+  for (let i = 0; i < allPlugins.length; i++) {
+    allPlugins[i].language = language
+    if (defaultPluginName && toolbar && allPlugins[i].name === defaultPluginName) {
+      defaultPlugin = allPlugins[i]
 
       if (defaultPlugin.defaultParamValue) {
         defaultParamValue = defaultPlugin.defaultParamValue
@@ -46,7 +59,7 @@ export default function ReactImageEditor(props: ReactImageEditorProps) {
 
   // 生成默认 toolbarItemConfig
   const config: any = {}
-  plugins.map(plugin => {
+  allPlugins.map(plugin => {
     if (plugin.name === 'repeal') {
       config[plugin.name] = { disable: true }
     } else {
@@ -61,11 +74,11 @@ export default function ReactImageEditor(props: ReactImageEditorProps) {
     image.onload = () => {
       setImageObj(image)
     }
-    if (props.crossOrigin !== undefined) {
-      image.crossOrigin = props.crossOrigin
+    if (crossOrigin !== undefined) {
+      image.crossOrigin = crossOrigin
     }
-    image.src = props.src
-  }, [props.src, props.crossOrigin])
+    image.src = src
+  }, [src, crossOrigin])
 
   function handlePluginChange(plugin: Plugin) {
     setCurrentPlugin(plugin)
@@ -85,19 +98,19 @@ export default function ReactImageEditor(props: ReactImageEditorProps) {
     setToolbarItemConfig(config)
   }
 
-  const style = {
-    width: props.width + 'px',
-    height: props.height + 'px',
-    ...props.style,
+  const containerStyle = {
+    width: width + 'px',
+    height: height + 'px',
+    ...style,
   }
 
   return (
     <EditorContext.Provider
       value={{
-        containerWidth: props.width!,
-        containerHeight: props.height!,
-        plugins,
-        toolbar: props.toolbar!,
+        containerWidth: width,
+        containerHeight: height,
+        plugins: allPlugins,
+        toolbar: toolbar,
         currentPlugin,
         paramValue,
         handlePluginChange,
@@ -107,14 +120,14 @@ export default function ReactImageEditor(props: ReactImageEditorProps) {
         language,
       }}
     >
-      <div className="react-img-editor" style={style}>
+      <div className="react-img-editor" style={containerStyle}>
         {
           imageObj ? (
             <>
               <Palette
-                height={props.height! - 42}
+                height={height - 42}
                 imageObj={imageObj}
-                getStage={props.getStage}
+                getStage={getStage}
               />
               <Toolbar />
             </>
@@ -124,13 +137,3 @@ export default function ReactImageEditor(props: ReactImageEditorProps) {
     </EditorContext.Provider>
   )
 }
-
-ReactImageEditor.defaultProps = {
-  width: 700,
-  height: 500,
-  style: {},
-  plugins: [],
-  toolbar: {
-    items: ['pen', 'eraser', 'arrow', 'rect', 'circle', 'mosaic', 'text', '|', 'repeal', 'download', 'crop'],
-  },
-} as Partial<ReactImageEditorProps>
