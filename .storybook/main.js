@@ -1,29 +1,29 @@
 const path = require('path')
 
-module.exports = {
-  stories: ['../src/**/*.stories.tsx'],
-  addons: ['@storybook/addon-essentials'],
+/** @type { import('@storybook/react-webpack5').StorybookConfig } */
+const config = {
+  stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  addons: [
+    '@storybook/addon-essentials',
+    '@storybook/addon-webpack5-compiler-swc',
+  ],
   framework: {
     name: '@storybook/react-webpack5',
-    options: {
-      builder: {
-        useSWC: false,
-      },
-    },
+    options: {},
   },
   typescript: {
     check: false,
-    reactDocgen: 'react-docgen-typescript',
-  },
-  docs: {
-    autodocs: true,
   },
   webpackFinal: async (config) => {
+    // Add less loader
     config.module.rules.push({
       test: /\.less$/,
       use: ['style-loader', 'css-loader', 'less-loader'],
       include: path.resolve(__dirname, '../'),
     })
+    
     return config
   },
 }
+
+export default config
