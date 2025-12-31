@@ -4,7 +4,7 @@ react-img-editor is an image editor react component that supports image cropping
 
 ![example](assets/demo.png)
 
-View our [storybook](https://cloudogu.github.io/react-img-editor) for a live demo.
+View our [storybook](https://hanyuzhou2006.github.io/react-img-editor) for a live demo.
 
 ## ✨ Features
 
@@ -17,14 +17,14 @@ View our [storybook](https://cloudogu.github.io/react-img-editor) for a live dem
 ## 📦 Download
 
 ```
-yarn add @cloudogu/react-img-editor
+yarn add @sansitech/react-img-editor
 ```
 
 ## 🔨 Introduce and use
 
 ```jsx
-import ReactImgEditor from "@cloudogu/react-img-editor";
-import "@cloudogu/react-img-editor/lib/index.css";
+import ReactImgEditor from "@sansitech/react-img-editor";
+import "@sansitech/react-img-editor/lib/index.css";
 
 <ReactImgEditor src="https://www.w3schools.com/html/img_girl.jpg" />;
 ```
