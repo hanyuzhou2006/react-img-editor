@@ -1,5 +1,5 @@
 {
-  "name": "@cloudogu/react-img-editor",
+  "name": "@sansitech/react-img-editor",
   "version": "0.4.0",
   "description": "Simple react image editor",
   "keywords": [
@@ -21,14 +21,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cloudogu/react-img-editor.git"
+    "url": "git+https://github.com/hanyuzhou2006/react-img-editor.git"
   },
   "author": "Sebastian Sdorra <s.sdorra@cloudogu.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cloudogu/react-img-editor/issues"
+    "url": "https://github.com/hanyuzhou2006/react-img-editor/issues"
   },
-  "homepage": "https://cloudogu.github.com/react-img-editor",
+  "homepage": "https://hanyuzhou2006.github.com/react-img-editor",
   "devDependencies": {
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
